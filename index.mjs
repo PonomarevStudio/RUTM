@@ -14,16 +14,15 @@ export default class ReplaceFromUTM {
 
     initReplacement() {
         const {initial, replacements, prefixes, source} = this;
-        if (!source || !replacements[source]) return `Source not handled: ${source}`;
+        if (!source || !replacements[source]) return console.warn(`Source not handled: ${source}`);
         const replacement = replacements[source];
         Object.keys(replacement).forEach(field => {
-            if (!initial[field]) return `Field not initialized: ${field}`;
+            if (!initial[field]) return console.warn(`Field not initialized: ${field}`);
             const prefix = (prefixes && prefixes[field]) ? prefixes[field] : '';
             document.querySelectorAll(`a[href="${prefix + initial[field]}"]`)
                 .forEach(node => (node.href = prefix + replacement[field]) &&
                     this.replaceTextNodeRecursive(node, initial[field], replacement[field]));
         })
-        console.debug(this);
     }
 
     replaceTextNodeRecursive(node, search, replace) {
