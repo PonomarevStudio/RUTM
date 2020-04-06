@@ -14,7 +14,7 @@ export default class ReplaceFromUTM {
 
     initReplacement() {
         const {initial, replacements, prefixes, source} = this;
-        if (!source || !replacements[source]) return console.warn(`Source not handled: ${source}`);
+        if (!source || !replacements[source]) return console.log(`Source not handled: ${source}`);
         const replacement = replacements[source];
         Object.keys(replacement).forEach(field => {
             if (!initial[field]) return console.warn(`Field not initialized: ${field}`);
